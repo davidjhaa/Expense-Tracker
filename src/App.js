@@ -4,36 +4,21 @@ import NewExpense from './Components/NewExpense/NewExpense'
 
 import Expenses from "./Components/Expenses/Expenses";
 
-let Dummy_expenses = [
-  {
-    id: 'e1',
-    title: 'School Fee',
-    amount: 250,
-    date: new Date(2022,1,12)
-  },
-  {
-    id: 'e2',
-    title: 'Books',
-    amount: 230,
-    date: new Date(2022,2,22)
-  },
-  {
-    id: 'e3',
-    title: 'House Rent',
-    amount: 700,
-    date: new Date(2021,4,2)
-  },
-  {
-    id: 'e4',
-    title: 'Food',
-    amount: 550,
-    date: new Date(2022,5,8)
-  },
-]
+let Dummy_expenses = [];
 
 function App(){
 
   const [expenses, setExpense] = useState(Dummy_expenses);
+
+  fetch('http://localhost:5000/api/expenses').then(
+    response => {
+      return response.json();
+    }
+  ).then(
+    data => {
+      console.log(data);
+    }
+  );
 
   const addExpenseHandler = (expense) => {
     const updatedExpense = [expense, ...expenses];
